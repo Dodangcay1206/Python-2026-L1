@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-"""Lab Session 1: Python Basics"""
-
 # Exercise 1
 r = float(input("Enter circle radius? "))
 area = 3.14 * r * r
@@ -55,7 +52,6 @@ print("range2:", list(range2))
 print("range3:", list(range3))
 print("range4:", list(range4))
 
-
 # Exercise 7
 def remove_dollar_sign(s):
     new_s = ""
@@ -64,10 +60,8 @@ def remove_dollar_sign(s):
             new_s += charac
     return new_s
 
-
 if __name__ == "__main__":
     print(remove_dollar_sign("12$ and 34$"))
-
 
 # Exercise 8
 def extract_even(l):
@@ -77,10 +71,8 @@ def extract_even(l):
             result.append(x)
     return result
 
-
 if __name__ == "__main__":
     print(extract_even([1, 4, 5, -1, 10]))
-
 
 # Exercise 9
 def factorial(n):
@@ -89,11 +81,9 @@ def factorial(n):
         result *= i
     return result
 
-
 if __name__ == "__main__":
     print(factorial(0))
     print(factorial(5))
-
 
 # Exercise 10
 def get_divisors(n):
@@ -102,7 +92,6 @@ def get_divisors(n):
         if n % i == 0:
             divisors.append(i)
     return divisors
-
 
 if __name__ == "__main__":
     print(get_divisors(12))
@@ -115,7 +104,6 @@ y2 = float(input("y2? "))
 d = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
 print("Distance =", d)
 
-
 # Exercise 12
 def pattern(m, n):
     for i in range(m):
@@ -125,7 +113,6 @@ def pattern(m, n):
             else:
                 print(" ", end=" ")
         print()
-
 
 if __name__ == "__main__":
     pattern(4, 5)
