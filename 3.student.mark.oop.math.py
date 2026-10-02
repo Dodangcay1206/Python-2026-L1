@@ -1,18 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Practical work 3: some maths and decorations
-
-- Converted the procedural student-mark program into classes (OOP).
-- math.floor() rounds every entered mark down to 1 decimal digit.
-- numpy is used to compute each student's GPA (credit-weighted average)
-  and to sort students by GPA, descending.
-- curses draws a decorated welcome/goodbye screen. The menu itself still
-  uses plain input()/print(), because mixing curses windows with normal
-  input() on every menu loop is out of scope for this lab; curses is only
-  used where it will not swallow keyboard input needed for typing names,
-  ids, marks, etc.
-"""
-
 import math
 import sys
 
@@ -20,16 +5,10 @@ import numpy as np
 
 try:
     import curses
-except ImportError:  # e.g. plain Windows Python without windows-curses
+except ImportError:  
     curses = None
 
-
-# ---------------------------------------------------------------------------
-# Domain classes
-# ---------------------------------------------------------------------------
 class Student:
-    """One student: id, name, date of birth."""
-
     def __init__(self, student_id, name, dob):
         self.student_id = student_id
         self.name = name
@@ -38,10 +17,7 @@ class Student:
     def __str__(self):
         return f"ID: {self.student_id}, Name: {self.name}, DoB: {self.dob}"
 
-
 class Course:
-    """One course: id, name, and its credit (weight for GPA)."""
-
     def __init__(self, course_id, name, credit):
         self.course_id = course_id
         self.name = name
@@ -50,15 +26,11 @@ class Course:
     def __str__(self):
         return f"ID: {self.course_id}, Name: {self.name}, Credit: {self.credit}"
 
-
-# ---------------------------------------------------------------------------
-# Manager class: holds the data and all the operations on it
-# ---------------------------------------------------------------------------
 class StudentMarkManager:
     def __init__(self):
-        self.students = []          # list[Student]
-        self.courses = []           # list[Course]
-        self.marks = {}             # {course_id: {student_id: mark}}
+        self.students = []          
+        self.courses = []           
+        self.marks = {}             
 
     # ---- small helpers -----------------------------------------------
     @staticmethod
@@ -129,12 +101,9 @@ class StudentMarkManager:
             raw_mark = self.read_float(
                 f"Mark for {student.name} (ID: {student.student_id}): "
             )
-            # math.floor(): round DOWN to 1 decimal digit
-            # e.g. 8.67 -> 8.6, 7.0 -> 7.0
             rounded_mark = math.floor(raw_mark * 10) / 10
             course_marks[student.student_id] = rounded_mark
 
-    # ---- listing ----------------------------------------------------------
     def list_students(self):
         print("\n--- Student List ---")
         if not self.students:
@@ -204,12 +173,6 @@ class StudentMarkManager:
         for rank, (student, gpa) in enumerate(ranking, start=1):
             print(f"{rank}. {student.name} (ID: {student.student_id}) - GPA: {gpa:.2f}")
 
-
-# ---------------------------------------------------------------------------
-# curses decoration: a title screen shown at start and end of the program.
-# Falls back to plain print() if curses/a real terminal is not available
-# (e.g. when this script's output is redirected/piped).
-# ---------------------------------------------------------------------------
 def _draw_banner(stdscr, lines):
     curses.curs_set(0)
     stdscr.clear()
@@ -231,7 +194,6 @@ def _draw_banner(stdscr, lines):
     win.refresh()
     win.getch()
 
-
 def show_banner(lines):
     if curses is None or not sys.stdout.isatty():
         print("=" * 40)
@@ -247,10 +209,6 @@ def show_banner(lines):
             print(line.center(40))
         print("=" * 40)
 
-
-# ---------------------------------------------------------------------------
-# Main menu
-# ---------------------------------------------------------------------------
 def main():
     show_banner(["STUDENT MARK MANAGEMENT", "Practical Work 3", "Press any key to start"])
 
@@ -287,7 +245,6 @@ def main():
             break
         else:
             print("Invalid choice!")
-
 
 if __name__ == "__main__":
     main()
